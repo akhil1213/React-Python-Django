@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';//for react-bootstrap
 import  {useForm} from 'react-hook-form';
@@ -17,6 +17,10 @@ class Signup extends React.Component {
       college:''
     };
   }
+  mySubmitHandler = (event) => {
+    event.preventDefault();
+    console.log(this.state);
+  }
   updateUsername = (event) => {
     this.setState({username: event.target.value});
   }
@@ -29,9 +33,12 @@ class Signup extends React.Component {
   updatePassword = (event) => {
     this.setState({password: event.target.value});
   }
+  updateCollege = (event) => {
+    this.setState({college: event.target.value});
+  }
     render(){
       return (
-        <div className="App">
+        <div id = "signup"className="App">
           <form onSubmit={this.mySubmitHandler}>
             <label>First name:</label>
                 <input
@@ -63,18 +70,22 @@ class Signup extends React.Component {
                 <Dropdown.Item >QCC</Dropdown.Item>
                 <Dropdown.Item >Hunter</Dropdown.Item>
             </DropdownButton> */}
-            <select name = "college" value={this.state.college}>
+            <select name = "college" onChange={this.updateCollege}>
               <option value="Queens College">Queens</option>
               <option value="Hunter College">Hunter</option>
               <option value="Baruch">Baruch</option>
             </select>
-            <input type ="submit" />
-            <Link to={{
+            <br></br>
+            <NavLink to={{
                   pathname: '/profile',
                   state:{
-                    state:this.state
+                      username:this.state.username,
+                      firstname:this.state.firstname,
+                      lastname:this.state.lastname,
+                      password:this.state.password,
+                      college:this.state.college
                   }
-                }}>Profile</Link>
+                }} activeStyle={{ color: 'black' }} className="navLink">Submit and go to Profile with data</NavLink>
           </form>
         </div>
       );

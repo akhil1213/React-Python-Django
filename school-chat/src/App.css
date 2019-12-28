@@ -12,3 +12,35 @@ nav{
   align-items: center;
   list-style:none;
 }
+#signup{
+  background-color:#13449A;
+}
+form{
+  padding-left:35%;
+  margin-left: 15%;
+  margin-right:15%;
+  background-color: #183C7A;
+}
+label,input{
+  color:aqua;
+  display:block;
+  margin-top:30px;
+  /* makes sure every label and input are on a new line */
+}
+.navLink{
+  display:block;
+  color:black;
+  background-color:green;
+  padding:5px;
+  width:40%;
+}
+.navLink:hover{
+  background-color:darkgreen;
+  text-decoration:none;
+}
+#nameandcollege{
+  color:blue;
+  margin-left:40px;
+  border:1px solid blue;
+  width:30%;
+}
