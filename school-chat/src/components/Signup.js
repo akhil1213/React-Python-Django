@@ -1,51 +1,84 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';//for react-bootstrap
+import  {useForm} from 'react-hook-form';
+import {useParams} from 'react-router';
 
-const options = [
-    'one', 'two', 'three'
-]
+
 class Signup extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstName:"",
-            lastName:"",
-            username:"",
-            password:"",
-            collegeName:""
-        };
-      }
-render(){
-  return (
-    <div className="App">
-      <form>
-        <p>First name:</p>
+  constructor(props){
+    super(props);
+    this.state = {
+      username:'',
+      firstname:'',
+      lastname:'',
+      password:'',
+      college:''
+    };
+  }
+  updateUsername = (event) => {
+    this.setState({username: event.target.value});
+  }
+  updateFName = (event) => {
+    this.setState({firstname: event.target.value});
+  }
+  updateLName = (event) => {
+    this.setState({lastname: event.target.value});
+  }
+  updatePassword = (event) => {
+    this.setState({password: event.target.value});
+  }
+    render(){
+      return (
+        <div className="App">
+          <form onSubmit={this.mySubmitHandler}>
+            <label>First name:</label>
+                <input
+                name="firstname"
+                type="text" 
+                onChange={this.updateFName}
+                />
+            <label>Last name:</label>
             <input
-            type="text"
+              name="lastname"
+              type="text"
+              onChange={this.updateLName}
             />
-        <p>Last name:</p>
-        <input
-          type="text"
-        />
-        <p>Username:</p>
-        <input
-          type="text"
-        />
-        <p>Password:</p>
-        <input
-          type="text"
-        />
-        <p>College:</p>
-        <DropdownButton id="dropdown-basic-button" title="College Options">
-            <Dropdown.Item active>QC</Dropdown.Item>
-            <Dropdown.Item >QCC</Dropdown.Item>
-            <Dropdown.Item >Hunter</Dropdown.Item>
-        </DropdownButton>
-      </form>
-    </div>
-  );
-}
+            <label>Username:</label>
+            <input
+              name="username"
+              type="text"
+              onChange={this.updateUsername}
+            />
+            <label>Password:</label>
+            <input
+              name="password"
+              type="text"
+              onChange={this.updatePassword}
+            />
+            <label>College:</label>
+            {/* <DropdownButton name ="college" id="dropdown-basic-button" title="College Options">
+                <Dropdown.Item active>QC</Dropdown.Item>
+                <Dropdown.Item >QCC</Dropdown.Item>
+                <Dropdown.Item >Hunter</Dropdown.Item>
+            </DropdownButton> */}
+            <select name = "college" value={this.state.college}>
+              <option value="Queens College">Queens</option>
+              <option value="Hunter College">Hunter</option>
+              <option value="Baruch">Baruch</option>
+            </select>
+            <input type ="submit" />
+            <Link to={{
+                  pathname: '/profile',
+                  state:{
+                    state:this.state
+                  }
+                }}>Profile</Link>
+          </form>
+        </div>
+      );
+    }
 }
 
 export default Signup;
