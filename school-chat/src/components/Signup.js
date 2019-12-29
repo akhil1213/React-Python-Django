@@ -4,18 +4,30 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';//for react-bootstrap
 import  {useForm} from 'react-hook-form';
 import {useParams} from 'react-router';
-
+//i kind of used this website https://serverless-stack.com/chapters/create-a-login-page.html
 
 class Signup extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      errormessage:false,
       username:'',
       firstname:'',
       lastname:'',
       password:'',
       college:''
     };
+  }
+  handleClick = (e) =>{
+    if(!this.validateForm())e.preventDefault();
+    /*if validatedform is false so its not validated then you prevent the 
+    default action from happening which is going to user profile page.*/
+  }
+  validateForm = () =>{
+    this.setState({errormessage:true});
+    return this.state.username.length > 0 && this.state.firstname.length > 0 
+      && this.state.lastname.length > 0 && this.state.password.length > 0 && 
+      this.state.college.length > 0
   }
   mySubmitHandler = (event) => {
     event.preventDefault();
@@ -40,6 +52,7 @@ class Signup extends React.Component {
       return (
         <div id = "signup"className="App">
           <form onSubmit={this.mySubmitHandler}>
+          {this.state.errormessage && <p className = "error">All fields must not be blank</p>}
             <label>First name:</label>
                 <input
                 name="firstname"
@@ -84,8 +97,8 @@ class Signup extends React.Component {
                       lastname:this.state.lastname,
                       password:this.state.password,
                       college:this.state.college
-                  }
-                }} activeStyle={{ color: 'black' }} className="navLink">Submit and go to Profile with data</NavLink>
+                  },
+                }} onClick={this.handleClick} activeStyle={{ color: 'black' }} className="navLink">Submit and go to Profile with data</NavLink>
           </form>
         </div>
       );

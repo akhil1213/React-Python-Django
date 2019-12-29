@@ -29,18 +29,24 @@ label,input{
 }
 .navLink{
   display:block;
-  color:black;
-  background-color:green;
-  padding:5px;
-  width:40%;
+  background-color: Crimson;  
+  border-radius: 5px;
+  color: white;
+  padding: .5em;
+  text-decoration: none;
+  width:180px;
 }
 .navLink:hover{
-  background-color:darkgreen;
-  text-decoration:none;
+  background-color: FireBrick;
+  color: White;
+  text-decoration: none;
 }
 #nameandcollege{
   color:blue;
   margin-left:40px;
   border:1px solid blue;
   width:30%;
+}
+.error{
+  color:rgb(83, 226, 245);
 }
