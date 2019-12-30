@@ -11,6 +11,7 @@ class Signup extends React.Component {
     super(props);
     this.state = {
       errormessage:false,
+      errormessagestring:'',
       username:'',
       firstname:'',
       lastname:'',
@@ -25,13 +26,19 @@ class Signup extends React.Component {
   }
   validateForm = () =>{
     this.setState({errormessage:true});
+      if(this.state.firstname.length === 0)
+        this.setState({errormessagestring:"firstname is empty"});
+      else if(this.state.lastname.length === 0)
+        this.setState({errormessagestring:"last name is empty"});
+      else if(this.state.username.length === 0)
+          this.setState({errormessagestring:'username is empty'});
+      else if(this.state.password.length === 0)
+          this.setState({errormessagestring:"password is empty"});
+      else
+          this.setState({errormessagestring:"college must be chosen"});
     return this.state.username.length > 0 && this.state.firstname.length > 0 
       && this.state.lastname.length > 0 && this.state.password.length > 0 && 
       this.state.college.length > 0
-  }
-  mySubmitHandler = (event) => {
-    event.preventDefault();
-    console.log(this.state);
   }
   updateUsername = (event) => {
     this.setState({username: event.target.value});
@@ -51,8 +58,8 @@ class Signup extends React.Component {
     render(){
       return (
         <div id = "signup"className="App">
-          <form onSubmit={this.mySubmitHandler}>
-          {this.state.errormessage && <p className = "error">All fields must not be blank</p>}
+          <form>
+          {this.state.errormessage && <p className = "error">Error:{this.state.errormessagestring}</p>}
             <label>First name:</label>
                 <input
                 name="firstname"
