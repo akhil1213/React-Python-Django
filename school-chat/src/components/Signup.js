@@ -2,9 +2,9 @@ import React from 'react';
 import {NavLink, Link} from 'react-router-dom';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';//for react-bootstrap
-import  {useForm} from 'react-hook-form';
-import {useParams} from 'react-router';
-import {EmailValidator} from 'email-validator';
+import {MenuItem,Select, Input, InputLabel} from '@material-ui/core'
+
+
 //i kind of used this website https://serverless-stack.com/chapters/create-a-login-page.html
 
 class Signup extends React.Component {
@@ -21,7 +21,10 @@ class Signup extends React.Component {
       fullname:'',
       email:'',
       password:'',
-      college:''
+      college:'',
+      style:{
+        display:'block'
+      }
     };
   }
   handleClick = (e) =>{
@@ -30,7 +33,6 @@ class Signup extends React.Component {
     default action from happening which is going to user profile page.*/
   }
   validateForm = () =>{
-    const regexp = '/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/';
     this.setState({errormessage:true});
       if(this.state.fullname.length === 0)
         this.setState({fullNameError:"fullname is blank"});
@@ -73,49 +75,50 @@ class Signup extends React.Component {
       return (
         <div id = "signup"className="App">
           <form id="formforsignup">
-            <label>Full name:</label>
-                <input
-                name="fullname"
-                type="text" 
-                onChange={this.updateFName}
-                />
-                {this.state.fullNameError.length > 0 && <div id ="errorlabel">{this.state.fullNameError}</div>}
-            <label>Email:</label>
-            <input
-              name="email"
+            <div className="spaceForInput">
+              <Input placeholder="Full Name" name="fullname"
+                  type="text" 
+                  onChange={this.updateFName}/>
+                  {this.state.fullNameError.length > 0 && <div id ="errorlabel">{this.state.fullNameError}</div>}
+            </div>
+            <div className="spaceForInput">
+            <Input placeholder="E-mail" name="email"
               type="email"
-              onChange={this.updateEmail}
-            />
+              onChange={this.updateEmail}/>
             {this.state.emailError.length > 0 && <div id ="errorlabel">{this.state.emailError}</div>}
-            <label>Username:</label>
-            <input
-              name="username"
-              type="text"
-              onChange={this.updateUsername}
-            />
-            {this.state.usernameError.length > 0 && <div id ="errorlabel">{this.state.usernameError}</div>}
-            <label>Password:</label>
-            <input
-              name="password"
-              type="password"
-              onChange={this.updatePassword}
-            />
-            {this.state.passwordError.length > 0 && <div id ="errorlabel">{this.state.passwordError}</div>}
-            <label>College:</label>
+            </div>
+            <div className="spaceForInput">
+              <Input
+                placeholder="Username"
+                name="username"
+                type="text"
+                onChange={this.updateUsername}
+              />
+              {this.state.usernameError.length > 0 && <div id ="errorlabel">{this.state.usernameError}</div>}
+            </div>
+            <div className="spaceForInput">
+              <Input
+                placeholder="password"
+                name="password"
+                type="password"
+                onChange={this.updatePassword}
+              />
+              {this.state.passwordError.length > 0 && <div id ="errorlabel">{this.state.passwordError}</div>}
+            </div>
             {/* <DropdownButton name ="college" id="dropdown-basic-button" title="College Options">
                 <Dropdown.Item active>QC</Dropdown.Item>
                 <Dropdown.Item >QCC</Dropdown.Item>
                 <Dropdown.Item >Hunter</Dropdown.Item>
             </DropdownButton> */}
-            <select name = "college" onChange={this.updateCollege}>
+            <InputLabel id="inline" id="label">College</InputLabel>
+            <Select className="spaceForInput" labelId="label" id="select" name = "college" onChange={this.updateCollege}>
               {/* make queens college default by using selected attribute */}
-              <option value ="">----</option>
-              <option value="Queens College">Queens</option>
-              <option value="Hunter College">Hunter</option>
-              <option value="Baruch">Baruch</option>
-            </select>
+              <MenuItem value ="">----</MenuItem>
+              <MenuItem value="Queens College">Queens</MenuItem>
+              <MenuItem value="Hunter College">Hunter</MenuItem>
+              <MenuItem value="Baruch">Baruch</MenuItem>
+            </Select>
             {this.state.collegeError.length > 0 && <div id ="errorlabel">{this.state.collegeError}</div>}
-            <br></br>
             <NavLink to={{
                   pathname: '/profile',
                   state:{
@@ -125,8 +128,7 @@ class Signup extends React.Component {
                       password:this.state.password,
                       college:this.state.college
                   },
-                }} onClick={this.handleClick} activeStyle={{ color: 'black' }} className="navLink">Submit and go to Profile with data</NavLink>
-          
+                }} onClick={this.handleClick} activeStyle={{ color: 'black' }} className="navLink">Submit</NavLink>
           </form>
         </div>
       );
@@ -134,3 +136,4 @@ class Signup extends React.Component {
 }
 
 export default Signup;
+

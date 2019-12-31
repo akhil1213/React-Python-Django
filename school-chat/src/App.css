@@ -12,15 +12,21 @@ nav{
   align-items: center;
   list-style:none;
 }
-#signup{
-  background-color:#13449A;
-}
+
 #formforsignup{
   padding-left:35%;
   margin-left: 15%;
   margin-right:15%;
-  background-color: rgb(9, 40, 92);
   border: 4px solid gray;
+}
+.spaceForInput{
+  margin-bottom:20px;
+}
+#inline{
+  display:inline;
+}
+.input,Select{
+  display:block;
 }
 label,input{
   color:aqua;
@@ -36,6 +42,7 @@ label,input{
   padding: .5em;
   text-decoration: none;
   width:180px;
+  text-align:center;
 }
 .navLink:hover{
   background-color: FireBrick;
