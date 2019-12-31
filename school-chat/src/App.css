@@ -15,11 +15,12 @@ nav{
 #signup{
   background-color:#13449A;
 }
-form{
+#formforsignup{
   padding-left:35%;
   margin-left: 15%;
   margin-right:15%;
-  background-color: #183C7A;
+  background-color: rgb(9, 40, 92);
+  border: 4px solid gray;
 }
 label,input{
   color:aqua;
@@ -49,4 +50,7 @@ label,input{
 }
 .error{
   color:rgb(83, 226, 245);
+}
+#errorlabel{
+  color:red;
 }
