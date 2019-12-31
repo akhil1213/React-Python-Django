@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink, Link} from 'react-router-dom';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';//for react-bootstrap
-import {MenuItem,Select, Input, InputLabel} from '@material-ui/core'
+import {Box,Container, MenuItem,Select, Input, InputLabel, TextField} from '@material-ui/core'
 
 
 //i kind of used this website https://serverless-stack.com/chapters/create-a-login-page.html
@@ -74,62 +74,69 @@ class Signup extends React.Component {
     render(){
       return (
         <div id = "signup"className="App">
-          <form id="formforsignup">
-            <div className="spaceForInput">
-              <Input placeholder="Full Name" name="fullname"
-                  type="text" 
-                  onChange={this.updateFName}/>
-                  {this.state.fullNameError.length > 0 && <div id ="errorlabel">{this.state.fullNameError}</div>}
-            </div>
-            <div className="spaceForInput">
-            <Input placeholder="E-mail" name="email"
-              type="email"
-              onChange={this.updateEmail}/>
-            {this.state.emailError.length > 0 && <div id ="errorlabel">{this.state.emailError}</div>}
-            </div>
-            <div className="spaceForInput">
-              <Input
-                placeholder="Username"
-                name="username"
-                type="text"
-                onChange={this.updateUsername}
-              />
-              {this.state.usernameError.length > 0 && <div id ="errorlabel">{this.state.usernameError}</div>}
-            </div>
-            <div className="spaceForInput">
-              <Input
-                placeholder="password"
-                name="password"
-                type="password"
-                onChange={this.updatePassword}
-              />
-              {this.state.passwordError.length > 0 && <div id ="errorlabel">{this.state.passwordError}</div>}
-            </div>
-            {/* <DropdownButton name ="college" id="dropdown-basic-button" title="College Options">
-                <Dropdown.Item active>QC</Dropdown.Item>
-                <Dropdown.Item >QCC</Dropdown.Item>
-                <Dropdown.Item >Hunter</Dropdown.Item>
-            </DropdownButton> */}
-            <InputLabel id="inline" id="label">College</InputLabel>
-            <Select className="spaceForInput" labelId="label" id="select" name = "college" onChange={this.updateCollege}>
-              {/* make queens college default by using selected attribute */}
-              <MenuItem value ="">----</MenuItem>
-              <MenuItem value="Queens College">Queens</MenuItem>
-              <MenuItem value="Hunter College">Hunter</MenuItem>
-              <MenuItem value="Baruch">Baruch</MenuItem>
-            </Select>
-            {this.state.collegeError.length > 0 && <div id ="errorlabel">{this.state.collegeError}</div>}
-            <NavLink to={{
-                  pathname: '/profile',
-                  state:{
-                      username:this.state.username,
-                      fullname:this.state.fullname,
-                      email:this.state.email,
-                      password:this.state.password,
-                      college:this.state.college
-                  },
-                }} onClick={this.handleClick} activeStyle={{ color: 'black' }} className="navLink">Submit</NavLink>
-          </form>
+          <Container maxWidth="sm">
+            <Box className='Box' border={1}borderColor="primary.main">
+                <form id="formforsignup">
+                  <div className="spaceForInput">
+                    <TextField placeholder="Full Name" name="fullname"
+                        error={this.state.fullNameError.length > 0}
+                        label="Full Name"
+                        id="standard-error-helper-text"
+                        helperText={this.state.fullNameError}
+                        type="text" 
+                        onChange={this.updateFName}/>
+                  </div>
+                  <div className="spaceForInput">
+                  <TextField label="email" placeholder="E-mail" name="email"
+                    type="email"
+                    onChange={this.updateEmail}/>
+                  {this.state.emailError.length > 0 && <div id ="errorlabel">{this.state.emailError}</div>}
+                  </div>
+                  <div className="spaceForInput">
+                    <Input
+                      placeholder="Username"
+                      name="username"
+                      type="text"
+                      onChange={this.updateUsername}
+                    />
+                    {this.state.usernameError.length > 0 && <div id ="errorlabel">{this.state.usernameError}</div>}
+                  </div>
+                  <div className="spaceForInput">
+                    <Input
+                      placeholder="password"
+                      name="password"
+                      type="password"
+                      onChange={this.updatePassword}
+                    />
+                    {this.state.passwordError.length > 0 && <div id ="errorlabel">{this.state.passwordError}</div>}
+                  </div>
+                  <TextField
+                      id="standard-select-currency"
+                      select
+                      label="Select"
+                      name="college"
+                      onChange={this.updateCollege}
+                      helperText="Please select your College"
+                  >
+                    <MenuItem value ="">----</MenuItem>
+                    <MenuItem value="Queens College">Queens</MenuItem>
+                    <MenuItem value="Hunter College">Hunter</MenuItem>
+                    <MenuItem value="Baruch">Baruch</MenuItem>
+                  </TextField>
+                  {this.state.collegeError.length > 0 && <div id ="errorlabel">{this.state.collegeError}</div>}
+                  <NavLink to={{
+                        pathname: '/profile',
+                        state:{
+                            username:this.state.username,
+                            fullname:this.state.fullname,
+                            email:this.state.email,
+                            password:this.state.password,
+                            college:this.state.college
+                        },
+                      }} onClick={this.handleClick} activeStyle={{ color: 'black' }} className="navLink">Submit</NavLink>
+                </form>
+            </Box>
+          </Container>
         </div>
       );
     }
