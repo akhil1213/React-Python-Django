@@ -47,6 +47,16 @@ nav{
 .Box{
   margin-top:10px;
 }
-.menuButton{
-  
+#list{
+  background-color:gray;
 }
+.listItem:not(:last-child){
+  border-bottom: 1px solid navy;
+  /* except the last list item */
+}
+#topRowOfList{
+  background-color:darkgrey;
+  color:red;
+  text-decoration: underline;
+}
+
