@@ -16,17 +16,9 @@ class Feed extends React.Component {
   render(){
     return (
       <div className="App">
-        <form onSubmit={this.handleSubmit}>
-          <p>Username:</p>
-              <input
-              type="text"
-              />
-          <p>Password:</p>
-            <input
-              type="text"
-            />
-            <Link to="/profile">Submit</Link>
-        </form>
+        <div id = "whatwereabout">
+          <h3>What we about</h3>
+        </div>
       </div>
     );
   }

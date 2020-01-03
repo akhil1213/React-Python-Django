@@ -52,9 +52,10 @@ class Signup extends React.Component {
       else{
           this.setState({fullNameError:"",emailError:"",usernameError:"",passwordError:"",collegeError:"college must be chosen"});
       }
-    return this.state.username.length > 0 && this.state.fullname.length > 0 
+      
+    return (this.state.username.length > 0 && this.state.fullname.length > 0 
       && this.state.email.length > 0 && this.state.password.length > 0 && 
-      this.state.college.length > 0;
+      this.state.college.length > 0 && (this.state.email).match(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/) != null);
   }
   updateUsername = (event) => {
     this.setState({username: event.target.value});
@@ -73,7 +74,7 @@ class Signup extends React.Component {
   }
     render(){
       return (
-        <div id = "signup"className="App">
+        <div id = "signup" className="App">
           <Container maxWidth="sm">
             <Box className='Box' border={1}borderColor="primary.main">
                 <form id="formforsignup">
@@ -87,10 +88,10 @@ class Signup extends React.Component {
                         onChange={this.updateFName}/>
                   </div>
                   <div className="spaceForInput">
-                  <TextField label="email" placeholder="E-mail" name="email"
-                    type="email"
-                    onChange={this.updateEmail}/>
-                  {this.state.emailError.length > 0 && <div id ="errorlabel">{this.state.emailError}</div>}
+                    <TextField label="email" placeholder="E-mail" name="email"
+                      type="email"
+                      onChange={this.updateEmail}/>
+                      {this.state.emailError.length > 0 && <div id ="errorlabel">{this.state.emailError}</div>}
                   </div>
                   <div className="spaceForInput">
                     <Input
@@ -118,7 +119,6 @@ class Signup extends React.Component {
                       onChange={this.updateCollege}
                       helperText="Please select your College"
                   >
-                    <MenuItem value ="">----</MenuItem>
                     <MenuItem value="Queens College">Queens</MenuItem>
                     <MenuItem value="Hunter College">Hunter</MenuItem>
                     <MenuItem value="Baruch">Baruch</MenuItem>

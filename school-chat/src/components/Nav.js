@@ -24,7 +24,7 @@ function Nav() {
             <li><Link to ="/">About</Link></li>
             <li><Link to ="/signup">Sign up</Link></li>
             <li>Log In</li>
-            <li>User Profile</li>
+            <li><Link to ="/profile" >User Profile</Link></li>
         </ul>
     </nav>
   );

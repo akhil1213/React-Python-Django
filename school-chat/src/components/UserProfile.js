@@ -10,13 +10,17 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-//figured it out using this link https://medium.com/@bopaiahmd.mca/how-to-pass-props-using-link-and-navlink-in-react-router-v4-75dc1d9507b4
+//https://medium.com/@bopaiahmd.mca/how-to-pass-props-using-link-and-navlink-in-react-router-v4-75dc1d9507b4
 
 class UserProfile extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            isModalOpened:false
+            isModalOpened:false,
+            professorName:'',
+            class:'',
+            time:'',
+            classes:[]
         };
     }
     openModal = () => {
@@ -36,19 +40,25 @@ class UserProfile extends React.Component{
             window.history.pushState(null, document.title,  window.location.href);
         });
     }
-    getStyles () {
-        return makeStyles(theme => ({
-            root: {
-              flexGrow: 1,
-              maxWidth: 752,
-            },
-            demo: {
-              backgroundColor: theme.palette.background.primary
-            },
-            title: {
-              margin: theme.spacing(4, 0, 2),
-            },
-          }));
+    updateProfessorname = (event) => {
+        this.setState({professorName: event.target.value});
+    }
+    updateClass = (event) => {
+        this.setState({class: event.target.value});
+    }
+    updateTime = (event) => {
+        this.setState({time: event.target.value});
+    }
+    addClass = () => {
+        let newClass = {
+            professorName:this.state.professorName,
+            class:this.state.class,
+            time:this.state.time
+        };
+        this.state.classes.push(newClass);
+        this.setState({classes:this.state.classes});
+        console.log(this.state.classes);
+        this.closeModal();
     }
     //console.log("profile",this.props.location.state.username);
     render(){
@@ -74,7 +84,7 @@ class UserProfile extends React.Component{
                     <input type="submit"/>
                 </form>
                 <div>
-                    <List id = "list" className={this.getStyles().demo}>
+                    <List id = "list">
                         <ListItem className ="listItem" id = "topRowOfList">
                             <ListItemText
                                 primary="Classes Taken during Spring Semester"
@@ -99,6 +109,7 @@ class UserProfile extends React.Component{
                                         label="Class name:"
                                         type="text"
                                         fullWidth
+                                        onChange={this.updateClass}
                                     />
                                     <TextField
                                         autoFocus
@@ -107,6 +118,7 @@ class UserProfile extends React.Component{
                                         label="Professor name:"
                                         type="text"
                                         fullWidth
+                                        onChange={this.updateProfessorname}
                                     />
                                     <TextField
                                         autoFocus
@@ -115,16 +127,46 @@ class UserProfile extends React.Component{
                                         label="Time"
                                         type="time"
                                         fullWidth
+                                        onChange={this.updateTime}
                                     />
                                     </DialogContent>
                                     <DialogActions>
-                                    <Button onClick={this.closeModal} color="primary">
-                                        Cancel
-                                    </Button>
+                                        <Button onClick={this.closeModal} color="primary">
+                                            Cancel
+                                        </Button>
+                                        <Button  onClick={this.addClass} color="primary">
+                                            Add Class
+                                        </Button>
                                     </DialogActions>
                                     </Dialog>
                             </ListItemSecondaryAction>
                         </ListItem>
+                            {this.state.classes.map((classObject,i) => {
+                                return (
+                                        <ListItem
+                                            key={i} 
+                                            className="listItem">
+                                            <ListItemText
+                                                primary={classObject.class}
+                                            />
+                                            <ListItemText
+                                                primary={classObject.professorName}
+                                            />
+                                            <ListItemText
+                                                primary={classObject.time}
+                                            />
+                                            <ListItemSecondaryAction>
+                                                <IconButton>
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                                <IconButton>
+                                                    <EditIcon />
+                                                </IconButton>
+                                            </ListItemSecondaryAction>
+                                        </ListItem>
+                                    )
+                                })
+                            }
                         <ListItem className = "listItem">
                             <ListItemText
                                 primary="CS351 Andy Abreu 4:10-5:00"
@@ -141,7 +183,6 @@ class UserProfile extends React.Component{
                     </List>
                 </div>
             </div>
-
         );
     }
 }
