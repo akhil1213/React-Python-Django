@@ -55,7 +55,7 @@ class Signup extends React.Component {
       
     return (this.state.username.length > 0 && this.state.fullname.length > 0 
       && this.state.email.length > 0 && this.state.password.length > 0 && 
-      this.state.college.length > 0 && (this.state.email).match(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/) != null);
+      this.state.college.length > 0);
   }
   updateUsername = (event) => {
     this.setState({username: event.target.value});

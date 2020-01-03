@@ -87,7 +87,13 @@ class UserProfile extends React.Component{
                     <List id = "list">
                         <ListItem className ="listItem" id = "topRowOfList">
                             <ListItemText
-                                primary="Classes Taken during Spring Semester"
+                                primary="Class Name"
+                            />
+                            <ListItemText
+                                primary="Professor Name"
+                            />
+                            <ListItemText
+                                primary="Time Taken"
                             />
                             <ListItemSecondaryAction>
                                 <IconButton onClick={this.openModal}>
@@ -169,7 +175,13 @@ class UserProfile extends React.Component{
                             }
                         <ListItem className = "listItem">
                             <ListItemText
-                                primary="CS351 Andy Abreu 4:10-5:00"
+                                primary="CS351"
+                            />
+                            <ListItemText
+                                primary="Andy Abreu "
+                            />
+                            <ListItemText
+                                primary="04:10"
                             />
                             <ListItemSecondaryAction>
                                 <IconButton>
