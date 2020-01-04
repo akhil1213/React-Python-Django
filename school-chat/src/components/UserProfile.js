@@ -61,6 +61,9 @@ class UserProfile extends React.Component{
         this.closeModal();
     }
     //console.log("profile",this.props.location.state.username);
+    listItemClicked = (i) => {
+        console.log(i);
+    }
     render(){
         return(
             <div className="App">
@@ -150,6 +153,9 @@ class UserProfile extends React.Component{
                             {this.state.classes.map((classObject,i) => {
                                 return (
                                         <ListItem
+                                            button="true"
+                                            onClick={() => { console.log('onClick'); }}
+                                            // onClick={this.listItemClicked(i)}
                                             key={i} 
                                             className="listItem">
                                             <ListItemText

@@ -58,7 +58,7 @@ export default function MenuAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Photos
+            Course-Chat
           </Typography>
           {auth && (
             <div>
