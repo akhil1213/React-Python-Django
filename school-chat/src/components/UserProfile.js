@@ -10,6 +10,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Link } from 'react-router-dom';
+//how to pass a link to listitem component onclick https://stackoverflow.com/questions/47206639/how-to-add-a-link-to-a-list-in-material-ui-1-0
 //https://medium.com/@bopaiahmd.mca/how-to-pass-props-using-link-and-navlink-in-react-router-v4-75dc1d9507b4
 
 class UserProfile extends React.Component{
@@ -67,16 +69,15 @@ class UserProfile extends React.Component{
     render(){
         return(
             <div className="App">
-                <div id = "nameandcollege">
+                {/* <div id = "nameandcollege">
                     <p>{this.props.location.state.fullname}</p>
                     <p>Student @ {this.props.location.state.college}</p>
                 </div>
                 <p>The username is {this.props.location.state.username}</p>
                 <p>The password is {this.props.location.state.password}</p>
                 <p>The college you go to is: {this.props.location.state.college}</p>
-                <p>Your current email set is:{this.props.location.state.email}</p>
+                <p>Your current email set is:{this.props.location.state.email}</p> */}
                 <form id="formforprofile">
-                    {/* send component up  */}
                     <label>
                         Change password:
                     </label>
@@ -153,7 +154,17 @@ class UserProfile extends React.Component{
                             {this.state.classes.map((classObject,i) => {
                                 return (
                                         <ListItem
-                                            button="true"
+                                            button
+                                            id="listItem"
+                                            component={Link}//the list item is now a Link element so u can pass a to prop for the link
+                                            to={{
+                                                pathname: '/class',
+                                                state:{
+                                                    className:classObject.class,
+                                                    professorName:classObject.professorName,
+                                                    time:classObject.time
+                                                },
+                                              }}
                                             onClick={() => { console.log('onClick'); }}
                                             // onClick={this.listItemClicked(i)}
                                             key={i} 
@@ -179,7 +190,19 @@ class UserProfile extends React.Component{
                                     )
                                 })
                             }
-                        <ListItem className = "listItem">
+                        <ListItem 
+                            button
+                            component={Link}
+                            to={{
+                                pathname:'/class',
+                                state:{
+                                    className:'CS351',
+                                    professorName:'Andy Abreu',
+                                    time:'04:10'
+                                }
+                            }}
+                            id="listItem"
+                            className = "listItem">
                             <ListItemText
                                 primary="CS351"
                             />

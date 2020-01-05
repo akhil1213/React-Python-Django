@@ -50,7 +50,7 @@ nav{
 #list{
   background-color:gray;
 }
-.listItem:not(:last-child){
+#listItem{
   border-bottom: 1px solid navy;
   /* except the last list item */
 }
