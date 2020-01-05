@@ -1,6 +1,5 @@
 import React from 'react';
 import {NavLink, Link} from 'react-router-dom';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
 import {Box,Container, MenuItem,Select, Input, InputLabel, TextField} from '@material-ui/core'
 
 
@@ -38,6 +37,9 @@ class Signup extends React.Component {
       else if(this.state.email.length === 0){
         this.setState({fullNameError:"",emailError:"email is empty"});
       }
+      else if(!this.validateEmail()){
+        this.setState({fullNameError:"",emailError:"Invalid email format",usernameError:"",passwordError:"",collegeError:""})
+      }
       // else if(!regexp.test(this.state.email).val())
       //   this.setState({errormessagestring:"email is in an invalid form"});
       else if(this.state.username.length === 0){
@@ -51,10 +53,10 @@ class Signup extends React.Component {
       else{
           this.setState({fullNameError:"",emailError:"",usernameError:"",passwordError:"",collegeError:"college must be chosen"});
       }
-      
     return (this.state.username.length > 0 && this.state.fullname.length > 0 
       && this.state.email.length > 0 && this.state.password.length > 0 && 
-      this.state.college.length > 0);
+      this.state.college.length > 0 && this.validateEmail());
+      //everything is filled out and the email is validated
   }
   updateUsername = (event) => {
     this.setState({username: event.target.value});
@@ -70,6 +72,12 @@ class Signup extends React.Component {
   }
   updateCollege = (event) => {
     this.setState({college: event.target.value});
+  }
+  validateEmail = () => {
+    let email = this.state.email;
+    const pattern = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+    console.log(pattern.test(email));
+    return pattern.test(email);
   }
     render(){
       return (
@@ -90,7 +98,8 @@ class Signup extends React.Component {
                     <TextField label="email" placeholder="E-mail" name="email"
                       type="email"
                       onChange={this.updateEmail}/>
-                      {this.state.emailError.length > 0 && <div id ="errorlabel">{this.state.emailError}</div>}
+                      {this.state.emailError === 'email is empty' && <div id ="errorlabel">{this.state.emailError}</div>}
+                      {this.state.emailError === 'Invalid email format' && <div id ="errorlabel">Invalid Email Format!</div>}
                   </div>
                   <div className="spaceForInput">
                     <Input
@@ -142,4 +151,3 @@ class Signup extends React.Component {
 }
 
 export default Signup;
-
