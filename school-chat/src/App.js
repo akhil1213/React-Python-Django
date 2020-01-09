@@ -9,11 +9,11 @@ import UserProfile from './components/UserProfile';
 import ClassComponent from './components/ClassComponent'
 import {useParams} from 'react-router';
 
-function App() {
+function App(props) {
   return ( 
     <Router>
       <div className="App">
-        <Nav />
+        <Nav store={props.store}/>
         <Route path="/" exact component={Feed}/>
         <Route path="/signup" component={Signup}/>
         <Route path="/profile" component={UserProfile}/>

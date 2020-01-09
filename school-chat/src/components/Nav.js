@@ -14,6 +14,9 @@ import Menu from '@material-ui/core/Menu';
 import {Link} from 'react-router-dom';
 import {Signup} from './Signup';
 import {UserProfile} from './UserProfile';
+import { signOut } from '../actions/isLogged'
+
+import { connect } from 'react-redux';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -26,16 +29,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MenuAppBar() {
+ function MenuAppBar(props) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
   const handleChange = event => {
     setAuth(event.target.checked);
+    if(!event.target.checked){
+      props.signOut();
+    }
   };
-
+  const signOut = () => {
+    props.signOut();
+  }
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -47,10 +54,13 @@ export default function MenuAppBar() {
   return (
     <div className={classes.root}>
       <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-        />
+        {props.isLogged && (
+          <FormControlLabel
+            control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
+            label={auth ? 'Logout' : 'Login'}
+          />
+        )
+        }
       </FormGroup>
       <AppBar position="static">
         <Toolbar>
@@ -60,10 +70,11 @@ export default function MenuAppBar() {
           <Typography variant="h6" className={classes.title}>
             Course-Chat
           </Typography>
-          {auth && (
+          {/* {auth && ( */}
             <div>
-              <Link to ="/signup">Sign up</Link>
-              <Link to ="/profile">Profile</Link>
+              {props.isLogged===false && (<Link to ="/signup">Sign up</Link>)}
+              {props.isLogged && <Link to ="/signup" onClick={signOut}>Log Out</Link>}
+              {props.isLogged && <Link to ="/profile">Profile</Link>}
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -89,13 +100,21 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
+                {props.isLogged && <MenuItem onClick={signOut}><Link to ="/signup">Log Out</Link></MenuItem>}
                 <MenuItem onClick={handleClose}><Link to ="/signup">Sign up</Link></MenuItem>
                 <MenuItem onClick={handleClose}><Link to ="/profile" >User Profile</Link></MenuItem>
               </Menu>
             </div>
-          )}
+          {/* )} */}
         </Toolbar>
       </AppBar>
     </div>
   );
 }
+const mapStateToProps = (store) => (
+  console.log(store),{
+    isLogged:store.loggedIn//isLogged is now a prop
+})
+export default connect(mapStateToProps,{signOut})(MenuAppBar)//we get signout action from here 
+
+
