@@ -11,6 +11,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
+import logoimage from '../images/logoimage.jpeg';
+
 //how to pass a link to listitem component onclick https://stackoverflow.com/questions/47206639/how-to-add-a-link-to-a-list-in-material-ui-1-0
 //https://medium.com/@bopaiahmd.mca/how-to-pass-props-using-link-and-navlink-in-react-router-v4-75dc1d9507b4
 
@@ -68,26 +70,27 @@ class UserProfile extends React.Component{
     }
     render(){
         return(
-            <div className="App">
-                {/* <div id = "nameandcollege">
-                    <p>{this.props.location.state.fullname}</p>
-                    <p>Student @ {this.props.location.state.college}</p>
+            <div className="App" id ="parentDiv">
+                <div id = "nameandcollegeandimage">
+                    <div id = "displayflexrow">
+                        <div id = "profileimage">
+                            <img src={logoimage}></img>
+                        </div>
+                        <div id = "nameandcollege">
+                            <div id = "fullname">
+                                <p>{this.props.location.state.fullname}</p>
+                            </div>
+                            <div id = "college">
+                                <p>Student @ {this.props.location.state.college}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>The username is {this.props.location.state.username}</p>
+                    <p>The password is {this.props.location.state.password}</p>
+                    <p>The college you go to is: {this.props.location.state.college}</p>
+                    <p>Your current email set is:{this.props.location.state.email}</p>
                 </div>
-                <p>The username is {this.props.location.state.username}</p>
-                <p>The password is {this.props.location.state.password}</p>
-                <p>The college you go to is: {this.props.location.state.college}</p>
-                <p>Your current email set is:{this.props.location.state.email}</p> */}
-                <form id="formforprofile">
-                    <label>
-                        Change password:
-                    </label>
-                    <input
-                        name="password"
-                        type="password"
-                    />
-                    <input type="submit"/>
-                </form>
-                <div>
+                    <div id = "listItems">
                     <List id = "list">
                         <ListItem className ="listItem" id = "topRowOfList">
                             <ListItemText
@@ -190,37 +193,6 @@ class UserProfile extends React.Component{
                                     )
                                 })
                             }
-                        <ListItem 
-                            button
-                            component={Link}
-                            to={{
-                                pathname:'/class',
-                                state:{
-                                    className:'CS351',
-                                    professorName:'Andy Abreu',
-                                    time:'04:10'
-                                }
-                            }}
-                            id="listItem"
-                            className = "listItem">
-                            <ListItemText
-                                primary="CS351"
-                            />
-                            <ListItemText
-                                primary="Andy Abreu "
-                            />
-                            <ListItemText
-                                primary="04:10"
-                            />
-                            <ListItemSecondaryAction>
-                                <IconButton>
-                                    <DeleteIcon />
-                                </IconButton>
-                                <IconButton>
-                                    <EditIcon />
-                                </IconButton>
-                            </ListItemSecondaryAction>
-                        </ListItem>
                     </List>
                 </div>
             </div>

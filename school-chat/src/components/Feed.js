@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-
-
+import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
+import logoimage from '../images/logoimage.jpeg';
 class Feed extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      username:"",
-      password:"",
     };
   }
   handleSubmit(event){
@@ -17,7 +15,10 @@ class Feed extends React.Component {
     return (
       <div className="App">
         <div id = "whatwereabout">
-          <h3>What we about</h3>
+          <div id = "iconandtext">
+              <img id = "img" src = {logoimage} alt="logo didn't load" />
+              <p>Academy square is a platform that allows you to connect with your class mates outside of school in order to better your learning experience</p>
+          </div>
         </div>
       </div>
     );

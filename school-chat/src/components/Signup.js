@@ -31,7 +31,6 @@ function Signup(props) {
     default action from happening which is going to user profile page.*/
   }
   function validateForm(){
-    //this.setState({errormessage:true});
     setErrorMessage(true);
       if(fullname.length === 0)
         setFullNameError("fullname is blank");
@@ -42,24 +41,17 @@ function Signup(props) {
       else if(!validateEmail()){
         setFullNameError("");
         setEmailError("Invalid email format");
-        //this.setState({fullNameError:"",emailError:"Invalid email format",usernameError:"",passwordError:"",collegeError:""})
       }
-      // else if(!regexp.test(this.state.email).val())
-      //   this.setState({errormessagestring:"email is in an invalid form"});
       else if(username.length === 0){
         setFullNameError("");
         setEmailError("");
         setUsernameError("Username is empty");
-          // this.setState({fullNameError:""});
-          // this.setState({emailError:""})
-          // this.setState({fullNameError:"",emailError:"",usernameError:"username empty af"});
       }
       else if(password.length === 0){
         setFullNameError("");
         setEmailError("");
         setUsernameError("");
         setPasswordError("password is empty");
-        //this.setState({fullNameError:"",emailError:"",usernameError:"",passwordError:"password empty"});
       }
       else{
         setFullNameError("");
@@ -67,12 +59,10 @@ function Signup(props) {
         setUsernameError("");
         setPasswordError("");
         setCollegeError("College must be chosen");
-          //this.setState({fullNameError:"",emailError:"",usernameError:"",passwordError:"",collegeError:"college must be chosen"});
       }
     return (username.length > 0 && fullname.length > 0 
       && email.length > 0 && password.length > 0 && 
       college.length > 0 && validateEmail());
-      //everything is filled out and the email is validated
   }
   function updateUsername(event) {
     setUsername(event.target.value);
