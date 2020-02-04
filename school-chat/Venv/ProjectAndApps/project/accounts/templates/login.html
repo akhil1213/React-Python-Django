@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<!-- when the submit button is being clicked, the action goes back to /signup -->
+        <form class="site-form" action="login" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <!-- A CSRF token is a unique, secret, unpredictable value that is generated 
+                by the server-side application and transmitted to the client in such a way 
+                that it is included in a subsequent HTTP request made by the client. When 
+                the later request is made, the server-side application validates that 
+                the request includes the expected token and rejects the request if the token is missing or invalid. -->
+            <input type = "submit" value="Login">
+        </form>
+
+</body>
+</html>
