@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'courses',
     'rest_framework',
     'frontend',
+<<<<<<< HEAD
     'knox',
     'accounts'
 ]
@@ -49,6 +50,10 @@ REST_FRAMEWORK = {
     ('knox.auth.TokenAuthentication',)
 }
 
+=======
+]
+
+>>>>>>> d0bb6d432c1f7b95aebdf20a262679a4fa039691
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
