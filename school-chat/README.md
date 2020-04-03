@@ -1,5 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+Frontend was done in React and used React-Redux. The backend is in python Django.
 ## Available Scripts
 
 In the project directory, you can run:
